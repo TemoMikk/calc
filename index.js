@@ -6,33 +6,36 @@ const inputValue = document.getElementById('input-value')
 const inputValue1 = document.getElementById('input-value1')
 const divide = document.getElementById('divide')
 
-let currentValue = 0
+let currentValue = localStorage.getItem('currentValue')
+  ? Number(localStorage.getItem('currentValue'))
+  : 0
+
+valueEl.innerHTML = currentValue
+
+const handleLocalStorage = (value) => {
+  localStorage.setItem('currentValue', value)
+}
 
 addBtn.addEventListener('click', function () {
   currentValue += 1
   valueEl.innerHTML = currentValue
-  localStorage.setItem('currentValue', valueEl.innerHTML)
+  handleLocalStorage(currentValue)
 })
 
 subBtn.addEventListener('click', function () {
   currentValue -= 1
   valueEl.innerHTML = currentValue
-  localStorage.setItem('currentValue', valueEl.innerHTML)
+  handleLocalStorage(currentValue)
 })
 
 multiply.addEventListener('click', function () {
   currentValue = currentValue * Number(inputValue.value)
   valueEl.innerHTML = currentValue
-  localStorage.setItem('currentValue', valueEl.innerHTML)
+  handleLocalStorage(currentValue)
 })
 
 divide.addEventListener('click', function () {
   currentValue = currentValue / Number(inputValue1.value)
   valueEl.innerHTML = currentValue
-  localStorage.setItem('currentValue', valueEl.innerHTML)
+  handleLocalStorage(currentValue)
 })
-
-let savedValue = localStorage.getItem('currentValue')
-if (savedValue) {
-  valueEl.innerHTML = savedValue
-}
